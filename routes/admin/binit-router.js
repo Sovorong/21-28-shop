@@ -4,19 +4,35 @@ const router = express.Router()
 const { error } = require('../../modules/util')
 
 router.get('/', (req, res, next) => {
-  res.render('admin/board/board-init', { css: 'admin-board' })
+  const type = req.query.type
+  const boardType = req.query.boardType || 'default'
+  if (type === 'create') {
+    res.render('admin/board/board-form', { boardType })
+  } else {
+    res.render('admin/board/board-list', { boardType })
+  }
 })
 
-router.put('/', (req, res, next) => {
-  res.send('/admin/binit:PUT')
-})
-
-router.delete('/', (req, res, next) => {
-  res.send('/admin/binit:DELETE')
+router.get('/:id', (req, res, next) => {
+  const type = req.query.type
+  const boardType = req.query.boardType || 'default'
+  if (type === 'update') {
+    res.render('admin/board/board-form', { css: 'admin-board', boardType })
+  } else {
+    res.render('admin/board/board-view', { css: 'admin-board', boardType })
+  }
 })
 
 router.post('/', (req, res, next) => {
-  res.send('/admin/binit:POST')
+  res.send('/admin/board:POST')
 })
 
-module.exports = { name: '/binit', router }
+router.put('/', (req, res, next) => {
+  res.send('/admin/board:PUT')
+})
+
+router.delete('/', (req, res, next) => {
+  res.send('/admin/board:DELETE')
+})
+
+module.exports = { name: '/board', router }
