@@ -4,35 +4,19 @@ const router = express.Router()
 const { error } = require('../../modules/util')
 
 router.get('/', (req, res, next) => {
-  const type = req.query.type
-  const boardType = req.query.boardType || 'default'
-  if (type === 'create') {
-    res.render('admin/board/board-form', { boardType })
-  } else {
-    res.render('admin/board/board-list', { boardType })
-  }
-})
-
-router.get('/:id', (req, res, next) => {
-  const type = req.query.type
-  const boardType = req.query.boardType || 'default'
-  if (type === 'update') {
-    res.render('admin/board/board-form', { css: 'admin-board', boardType })
-  } else {
-    res.render('admin/board/board-view', { css: 'admin-board', boardType })
-  }
-})
-
-router.post('/', (req, res, next) => {
-  res.send('/admin/board:POST')
+  res.render('admin/board/board-init', {})
 })
 
 router.put('/', (req, res, next) => {
-  res.send('/admin/board:PUT')
+  res.send('/admin/binit:PUT')
 })
 
 router.delete('/', (req, res, next) => {
-  res.send('/admin/board:DELETE')
+  res.send('/admin/binit:DELETE')
 })
 
-module.exports = { name: '/board', router }
+router.post('/', (req, res, next) => {
+  res.send('/admin/binit:POST')
+})
+
+module.exports = { name: '/binit', router }
